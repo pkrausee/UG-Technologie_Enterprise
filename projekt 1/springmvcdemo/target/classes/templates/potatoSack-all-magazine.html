@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pl-PL">
+    <head>
+        <title>Potato sacks</title>
+        <style>
+            table {border-collapse: collapse;}
+            table, th, td {border: 1px solid black;}
+        </style>
+    </head>
+    <body>
+    <div th:switch="${potatoSacks.size()}">
+        <h1 th:case="1">We have <span th:text="${potatoSacks.size()}"></span> magazines in our database</h1>
+        <h1 th:case="*">We have <span th:text="${potatoSacks.size()}"></span> magazines in our database</h1>
+    </div>
+
+    <div th:switch="${potatoSacks.size()}">
+        <h5 th:case="0">There are no magazines</h5>
+
+        <div th:case="*">
+            <table>
+                <thead>
+                <tr>
+                    <th>Magazine</th>
+                    <th>Sacks</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="potatoSack : ${potatoSacks}">
+                    <td th:text="${potatoSack.getKey()}"></td>
+                    <td th:text="${potatoSack.getValue()}"></td>
+
+                    <td>
+                        <form action="#" method="get" th:action="@{/potatoSack/magazine/{magazine}(magazine=${potatoSack.getKey()})}">
+                            <input class="submit" type="submit" value="Show"/>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <form action="#" method="get" th:action="@{/potatoSack}">
+            <input class="submit" type="submit" value="Back"/>
+        </form>
+
+        <form action="#" method="get" th:action="@{/potatoSack/new}">
+            <input class="submit" type="submit" value="Add"/>
+        </form>
+    </div>
+    </body>
+</html>

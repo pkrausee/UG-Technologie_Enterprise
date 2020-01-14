@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl-PL" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All students</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<h2>Welcome to our School database</h2>
+
+<div th:switch="${students.size()}">
+    <h3 th:case="1">We have <span th:text="${students.size()}"></span> students in our database</h3>
+    <h3 th:case="*">We have <span th:text="${students.size()}"></span> students in our database</h3>
+</div>
+
+<div th:switch="${errorMsg}">
+    <h4 th:case="null"></h4>
+    <h4 th:case="*">Error: <span th:text="${errorMsg}"></span></h4>
+</div>
+
+<div th:switch="${msg}">
+    <h4 th:case="null"></h4>
+    <h4 th:case="*"><span th:text="${msg}"></span></h4>
+</div>
+
+<div th:switch="${students.size()}">
+    <h5 th:case="0">There are no students</h5>
+
+    <div th:case="*">
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Second Name</th>
+                <th>Surname</th>
+                <th>Group</th>
+                <th>Address Id</th>
+                <th>Lectures</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.getId()}"></td>
+                <td th:text="${student.getName()}"></td>
+                <td th:text="${student.getSecondName()}"></td>
+                <td th:text="${student.getSurname()}"></td>
+                <td th:text="${student.getGroup().getName()}"></td>
+                <td th:text="${student.getAddress().getId()}"></td>
+                <td th:text="${student.getLectures().size()}"></td>
+
+                <td>
+                    <form action="#" method="get" th:action="@{/student/edit/{id}(id=${student.getId()})}">
+                        <input class="submit" type="submit" value="Edit"/>
+                    </form>
+                </td>
+
+                <td>
+                    <form action="#" method="post" th:action="@{/student/remove/{id}(id=${student.getId()})}">
+                        <input class="submit" type="submit" value="Remove"/>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    <form action="#" method="get" th:action="@{/student/new}">
+        <input class="submit" type="submit" value="Add"/>
+    </form>
+
+    <div>
+        <a href="/">Back</a>
+    </div>
+</div>
+</body>
+</html>

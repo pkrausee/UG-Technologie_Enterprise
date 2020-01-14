@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pl-PL" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All groups</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<h2>Welcome to our School database</h2>
+
+<div th:switch="${groups.size()}">
+    <h3 th:case="1">We have <span th:text="${groups.size()}"></span> groups in our database</h3>
+    <h3 th:case="*">We have <span th:text="${groups.size()}"></span> groups in our database</h3>
+</div>
+
+<div th:switch="${errorMsg}">
+    <h4 th:case="null"></h4>
+    <h4 th:case="*">Error: <span th:text="${errorMsg}"></span></h4>
+</div>
+
+<div th:switch="${msg}">
+    <h4 th:case="null"></h4>
+    <h4 th:case="*"><span th:text="${msg}"></span></h4>
+</div>
+
+<div th:switch="${groups.size()}">
+    <h5 th:case="0">There are no groups</h5>
+
+    <div th:case="*">
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Specialization</th>
+                <th>Max students</th>
+                <th>Current students</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="group : ${groups}">
+                <td th:text="${group.getId()}"></td>
+                <td th:text="${group.getName()}"></td>
+                <td th:text="${group.getSpecialization()}"></td>
+                <td th:text="${group.getMaxStudents()}"></td>
+                <td th:text="${group.getStudents().size()}"></td>
+
+                <td>
+                    <form action="#" method="get" th:action="@{/group/edit/{id}(id=${group.getId()})}">
+                        <input class="submit" type="submit" value="Edit"/>
+                    </form>
+                </td>
+
+                <td>
+                    <form action="#" method="post" th:action="@{/group/remove/{id}(id=${group.getId()})}">
+                        <input class="submit" type="submit" value="Remove"/>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    <form action="#" method="get" th:action="@{/group/new}">
+        <input class="submit" type="submit" value="Add"/>
+    </form>
+
+    <div>
+        <a href="/">Back</a>
+    </div>
+</div>
+</body>
+</html>

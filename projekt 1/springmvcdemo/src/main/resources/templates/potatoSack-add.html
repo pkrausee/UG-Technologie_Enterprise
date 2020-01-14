@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="pl-PL">
+    <head>
+        <title>Add potato sack</title>
+        <style>
+            div  { float: left; margin-left: 5px; }
+            .labels { line-height: 1.35; }
+            .input { width:250px; display:inline-block }
+            .submit { margin-top: 5px; }
+        </style>
+    </head>
+    <body>
+        <h1>Fill form to add new potato sack</h1>
+
+        <form action="#" method="post" th:action="@{/potatoSack}" th:object="${potatoSack}">
+            <div class="labels">
+                <label for="id">Id</label><br>
+                <label for="kind">Potatoes kind</label><br>
+                <label for="weight">Sack weight (in kg's)</label><br>
+                <label for="ripDate">Rip date</label><br>
+                <label for="expirationDate">Expiration date</label><br>
+                <label for="magazine">Magazine</label><br>
+
+                <input class="submit" type="submit" value="Add Sack"/>
+            </div>
+
+            <div>
+                <input class="input" id="id" placeholder="Leave empty to generate new id" th:field="*{id}" type="text"/><br>
+                <input class="input" id="kind" placeholder="Kind" th:field="*{kind}" type="text"/><br>
+                <input class="input" id="weight" th:field="*{weight}" type="number" step="0.01" /><br>
+                <input class="input" id="ripDate" th:field="*{ripDate}" type="date"/><br>
+                <input class="input" id="expirationDate" th:field="*{expirationDate}" type="date"/><br>
+                <input class="input" id="magazine" placeholder="Magazine" th:field="*{magazine}" type="text"/><br>
+            </div>
+        </form>
+    </body>
+</html>

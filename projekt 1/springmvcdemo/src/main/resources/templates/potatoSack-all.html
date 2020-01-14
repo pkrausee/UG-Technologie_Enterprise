@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pl-PL">
+    <head>
+        <title>Potato sacks</title>
+        <style>
+            table {border-collapse: collapse;}
+            table, th, td {border: 1px solid black;}
+        </style>
+    </head>
+    <body>
+        <h2>Welcome to our wholesale</h2>
+
+        <div th:switch="${potatoSacks.size()}">
+            <h3 th:case="1">We have <span th:text="${potatoSacks.size()}"></span> potato sack in our database</h3>
+            <h3 th:case="*">We have <span th:text="${potatoSacks.size()}"></span> potato sacks in our database</h3>
+        </div>
+
+        <div th:switch="${errorMsg}">
+            <h4 th:case="null"></h4>
+            <h4 th:case="*">Error: <span th:text="${errorMsg}"></span></h4>
+        </div>
+
+        <div th:switch="${msg}">
+            <h4 th:case="null"></h4>
+            <h4 th:case="*"><span th:text="${msg}"></span></h4>
+        </div>
+
+        <div th:switch="${potatoSacks.size()}">
+            <h5 th:case="0">There are no potato sacks</h5>
+
+            <div th:case="*">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Kind</th>
+                            <th>Weight</th>
+                            <th>Rip date</th>
+                            <th>Expiration date</th>
+                            <th>Magazine</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="potatoSack : ${potatoSacks}">
+                            <td th:text="${potatoSack.getId()}"></td>
+                            <td th:text="${potatoSack.getKind()}"></td>
+                            <td th:text="${potatoSack.getWeight()}"></td>
+                            <td th:text="${potatoSack.getRipDate()}"></td>
+                            <td th:text="${potatoSack.getExpirationDate()}"></td>
+                            <td th:text="${potatoSack.getMagazine()}"></td>
+
+                            <td>
+                                <form action="#" method="get" th:action="@{/potatoSack/edit/{id}(id=${potatoSack.getId()})}">
+                                    <input class="submit" type="submit" value="Edit"/>
+                                </form>
+                            </td>
+
+                            <td>
+                                <form action="#" method="post" th:action="@{/potatoSack/remove/{id}(id=${potatoSack.getId()})}">
+                                    <input class="submit" type="submit" value="Remove"/>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+            <form action="#" method="get" th:action="@{/potatoSack/new}">
+                <input class="submit" type="submit" value="Add"/>
+            </form>
+
+            <form action="#" method="get" th:action="@{/potatoSack/kind}">
+                <input class="submit" type="submit" value="Kind report"/>
+            </form>
+
+            <form action="#" method="get" th:action="@{/potatoSack/magazine}">
+                <input class="submit" type="submit" value="Magazine report"/>
+            </form>
+        </div>
+    </body>
+</html>

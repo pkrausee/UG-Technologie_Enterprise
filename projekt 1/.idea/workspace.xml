@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1a0a8fb2-9bd4-48e4-83b9-616364d3ae88" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../projekt 2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../projekt 2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projekt 2/src/main/java/pkrause/proj2/controller/api/SetUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../projekt 2/src/main/java/pkrause/proj2/controller/api/SetUpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projekt 2/src/main/java/pkrause/proj2/domain/Address.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projekt 2/src/main/java/pkrause/proj2/domain/Group.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projekt 2/src/main/java/pkrause/proj2/domain/Lecture.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../projekt 2/src/main/java/pkrause/proj2/domain/Student.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1VwZrod5QAnewUt64YFomG5NZfg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../projekt 2" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1a0a8fb2-9bd4-48e4-83b9-616364d3ae88" name="Default Changelist" comment="" />
+      <created>1578166318022</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578166318022</updated>
+      <workItem from="1578166319231" duration="207000" />
+      <workItem from="1578503807538" duration="629000" />
+      <workItem from="1578504694362" duration="6793000" />
+      <workItem from="1578514440954" duration="15000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1169" y="566" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1578166349646">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1169" y="566" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1578166349646" />
+    <state x="984" y="431" key="FileChooserDialogImpl" timestamp="1578514453922">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="984" y="431" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1578514453922" />
+    <state x="1435" y="420" key="com.intellij.ide.util.TipDialog" timestamp="1578514441230">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1435" y="420" key="com.intellij.ide.util.TipDialog/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1578514441230" />
+  </component>
+</project>
