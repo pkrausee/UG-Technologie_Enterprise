@@ -1,6 +1,5 @@
 package pkrause.proj3.controller.web;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pkrause.proj3.domain.Student;
-import pkrause.proj3.result.SingleResult;
 import pkrause.proj3.service.StudentService;
 
 import java.util.UUID;
@@ -24,23 +22,15 @@ public class StudentController {
 
     @GetMapping("/student")
     public String allGroup(Model model) {
-        model.addAttribute("students", this.service.read().getResult());
+        model.addAttribute("students", this.service.read());
 
         return "student/all";
     }
 
     @PostMapping("/student")
     public String addLecture(Student student, Model model) {
-        SingleResult<Student> addResult = this.service.save(student);
-
-        if (!addResult.success()) {
-            model.addAttribute("errorMsg", addResult.getMessage());
-
-        } else {
-            model.addAttribute("msg", "Student with id: " + student.getId() + " has been added");
-        }
-
-        model.addAttribute("Students", this.service.read().getResult());
+        model.addAttribute("msg", "Student with id: " + this.service.save(student).getId() + " has been added");
+        model.addAttribute("Students", this.service.read());
 
         return "student/all";
     }
@@ -56,14 +46,10 @@ public class StudentController {
     public String putLecture(@PathVariable("id") String id, Model model) {
         try {
             UUID uuid = UUID.fromString(id);
+            Student findResult = this.service.read(uuid);
 
-            SingleResult<Student> findResult = this.service.read(uuid);
-            if (!findResult.success()) {
-                model.addAttribute("errorMsg", findResult.getMessage());
-                return "student/all";
-            }
+            model.addAttribute("student", findResult);
 
-            model.addAttribute("student", findResult.getResult());
             return "student/edit";
         } catch (IllegalArgumentException exception) {
             model.addAttribute("errorMsg", "Cannot parse given uuid");
@@ -74,15 +60,10 @@ public class StudentController {
 
     @PostMapping("/student/edit/")
     public String putLecture(Student student, Model model) {
-        SingleResult<Student> updateResult = this.service.update(student.getId(), student);
+        Student updateResult = this.service.update(student.getId(), student);
 
-        if (!updateResult.success()) {
-            model.addAttribute("errorMsg", updateResult.getMessage());
-        } else {
-            model.addAttribute("msg", "Students with id: " + student.getId() + " has been updated");
-        }
-
-        model.addAttribute("students", this.service.read().getResult());
+        model.addAttribute("msg", "Students with id: " + updateResult.getId() + " has been updated");
+        model.addAttribute("students", this.service.read());
 
         return "student/all";
     }
@@ -92,19 +73,14 @@ public class StudentController {
         try {
             UUID uuid = UUID.fromString(id);
 
-            SingleResult<Student> deleteResult = this.service.delete(uuid);
+            this.service.delete(uuid);
 
-            if (!deleteResult.success()) {
-                model.addAttribute("errorMsg", deleteResult.getMessage());
-            } else {
-                model.addAttribute("msg", "Students id: " + id + " has been deleted");
-            }
-
+            model.addAttribute("msg", "Students id: " + id + " has been deleted");
         } catch (IllegalArgumentException exception) {
             model.addAttribute("errorMsg", "Cannot parse given longId");
         }
 
-        model.addAttribute("students", this.service.read().getResult());
+        model.addAttribute("students", this.service.read());
 
         return "student/all";
     }

@@ -1,9 +1,7 @@
 package pkrause.proj3.repository;
 
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import pkrause.proj3.domain.Group;
 
-@Repository
-public interface ReactiveGroupRepository extends ReactiveCrudRepository<Group, Long> {
+public interface ReactiveGroupRepository extends ReactiveMongoRepository<Group, Long> {
 }

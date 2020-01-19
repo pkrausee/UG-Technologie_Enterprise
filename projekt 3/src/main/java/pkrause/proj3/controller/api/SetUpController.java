@@ -33,9 +33,8 @@ public class SetUpController {
         group1.setMaxStudents(20);
         group2.setMaxStudents(20);
 
-        if (!groupService.save(group1).success() || !groupService.save(group2).success()) {
-            return new ResponseEntity<>("Group error!", HttpStatus.BAD_REQUEST);
-        }
+        groupService.save(group1);
+        groupService.save(group2);
 
         Student student1 = new Student();
         Student student2 = new Student();
@@ -54,13 +53,10 @@ public class SetUpController {
         student3.setGroup(group2);
         student4.setGroup(group2);
 
-        if (
-                !studentService.save(student1).success() ||
-                        !studentService.save(student2).success() ||
-                        !studentService.save(student3).success() ||
-                        !studentService.save(student4).success()) {
-            return new ResponseEntity<>("Student error!", HttpStatus.BAD_REQUEST);
-        }
+        studentService.save(student1);
+        studentService.save(student2);
+        studentService.save(student3);
+        studentService.save(student4);
 
         return new ResponseEntity<>("Success", HttpStatus.CREATED);
     }

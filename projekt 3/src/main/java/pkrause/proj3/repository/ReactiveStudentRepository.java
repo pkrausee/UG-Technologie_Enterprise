@@ -1,11 +1,9 @@
 package pkrause.proj3.repository;
 
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import pkrause.proj3.domain.Student;
 
 import java.util.UUID;
 
-@Repository
-public interface ReactiveStudentRepository extends ReactiveCrudRepository<Student, UUID> {
+public interface ReactiveStudentRepository extends ReactiveMongoRepository<Student, UUID> {
 }

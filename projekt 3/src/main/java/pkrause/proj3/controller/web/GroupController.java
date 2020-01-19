@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pkrause.proj3.domain.Group;
-import pkrause.proj3.result.SingleResult;
 import pkrause.proj3.service.GroupService;
 
 @Controller("groupWebController")
@@ -21,22 +20,16 @@ public class GroupController {
 
     @GetMapping("/group")
     public String allGroup(Model model) {
-        model.addAttribute("groups", this.service.read().getResult());
+        model.addAttribute("groups", this.service.read());
 
         return "group/all";
     }
 
     @PostMapping("/group")
     public String addGroup(Group group, Model model) {
-        SingleResult<Group> addResult = this.service.save(group);
-        if (!addResult.success()) {
-            model.addAttribute("errorMsg", addResult.getMessage());
+        model.addAttribute("msg", "Group with id: " + this.service.save(group).getId() + " has been added");
 
-        } else {
-            model.addAttribute("msg", "Group with id: " + group.getId() + " has been added");
-        }
-
-        model.addAttribute("groups", this.service.read().getResult());
+        model.addAttribute("groups", this.service.read());
 
         return "group/all";
     }
@@ -53,13 +46,9 @@ public class GroupController {
         try {
             Long longId = Long.valueOf(id);
 
-            SingleResult<Group> findResult = this.service.read(longId);
-            if (!findResult.success()) {
-                model.addAttribute("errorMsg", findResult.getMessage());
-                return "group/all";
-            }
+            Group findResult = this.service.read(longId);
 
-            model.addAttribute("group", findResult.getResult());
+            model.addAttribute("group", findResult);
             return "group/edit";
         } catch (IllegalArgumentException exception) {
             model.addAttribute("errorMsg", "Cannot parse given uuid");
@@ -70,15 +59,10 @@ public class GroupController {
 
     @PostMapping("/group/edit/")
     public String putGroup(Group group, Model model) {
-        SingleResult<Group> updateResult = this.service.update(group.getId(), group);
+        Group updateResult = this.service.update(group.getId(), group);
 
-        if (!updateResult.success()) {
-            model.addAttribute("errorMsg", updateResult.getMessage());
-        } else {
-            model.addAttribute("msg", "Group with id: " + group.getId() + " has been updated");
-        }
-
-        model.addAttribute("groups", this.service.read().getResult());
+        model.addAttribute("msg", "Group with id: " + updateResult.getId() + " has been updated");
+        model.addAttribute("groups", this.service.read());
 
         return "group/all";
     }
@@ -88,18 +72,14 @@ public class GroupController {
         try {
             Long longId = Long.valueOf(id);
 
-            SingleResult<Group> deleteResult = this.service.delete(longId);
-            if (!deleteResult.success()) {
-                model.addAttribute("errorMsg", deleteResult.getMessage());
-            } else {
-                model.addAttribute("msg", "Group id: " + id + " has been deleted");
-            }
+            this.service.delete(longId);
 
+            model.addAttribute("msg", "Group id: " + id + " has been deleted");
         } catch (IllegalArgumentException exception) {
             model.addAttribute("errorMsg", "Cannot parse given longId");
         }
 
-        model.addAttribute("groups", this.service.read().getResult());
+        model.addAttribute("groups", this.service.read());
 
         return "group/all";
     }
