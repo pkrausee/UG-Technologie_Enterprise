@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl-PL"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add group</title>
+    <style>
+        div {
+            float: left;
+            margin-left: 5px;
+        }
+
+        .labels {
+            line-height: 1.35;
+        }
+
+        .input {
+            width: 250px;
+            display: inline-block
+        }
+
+        .submit {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Fill form to add new group</h1>
+
+<form action="#" method="post" th:action="@{/group}" th:object="${group}">
+    <div class="labels">
+        <label for="id">Id</label><br>
+        <label for="name">Name</label><br>
+        <label for="specialization">Specialization</label><br>
+        <label for="maxStudents">Max students</label><br>
+
+        <input class="submit" type="submit" value="Add"/>
+    </div>
+
+    <div>
+        <input class="input" id="id" placeholder="Leave empty to generate new id" th:field="*{id}" type="text"/><br>
+        <input class="input" id="name" placeholder="Name" th:field="*{name}" type="text"/><br>
+        <input class="input" id="specialization" placeholder="Specialization" th:field="*{specialization}" type="text"/><br>
+        <input class="input" id="maxStudents" placeholder="Max students" step="0.01" th:field="*{maxStudents}" type="number"/><br>
+    </div>
+
+    <div>
+        <a href="/">Back</a>
+    </div>
+</form>
+</body>
+</html>
