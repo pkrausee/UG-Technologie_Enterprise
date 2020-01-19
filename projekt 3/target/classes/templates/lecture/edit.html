@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl-PL" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit lecture</title>
+    <style>
+        div {
+            float: left;
+            margin-left: 5px;
+        }
+
+        .labels {
+            line-height: 1.35;
+        }
+
+        .input {
+            width: 250px;
+            display: inline-block
+        }
+
+        .submit {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Fill form to edit lecture</h1>
+
+<h1 th:value="${lecture.getName()}"></h1>
+
+<form action="#" method="post" th:action="@{/lecture/edit/}" th:object="${lecture}">
+    <div class="labels">
+        <label for="id">Id</label><br>
+        <label for="name">Name</label><br>
+        <label for="range">Range</label><br>
+        <label for="maxStudents">Max students</label><br>
+
+        <input class="submit" type="submit" value="Edit"/>
+    </div>
+
+    <div>
+        <input class="input" id="id" th:field="*{id}" th:value="${lecture.getId()}" type="text"/><br>
+        <input class="input" id="name" th:field="*{name}" th:value="${lecture.getName()}" type="text"/><br>
+        <input class="input" id="range" th:field="*{range}" th:value="${lecture.getRange()}" type="text"/><br>
+        <input class="input" id="maxStudents" step="0.01" th:field="*{maxStudents}" th:value="${lecture.getMaxStudents()}" type="number"/><br>
+    </div>
+
+    <div>
+        <a href="/">Back</a>
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl-PL" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit group</title>
+    <style>
+        div {
+            float: left;
+            margin-left: 5px;
+        }
+
+        .labels {
+            line-height: 1.35;
+        }
+
+        .input {
+            width: 250px;
+            display: inline-block
+        }
+
+        .submit {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Fill form to edit group</h1>
+
+<h1 th:value="${group.getName()}"></h1>
+
+<form action="#" method="post" th:action="@{/group/edit/}" th:object="${group}">
+    <div class="labels">
+        <label for="id">Id</label><br>
+        <label for="kind">Name</label><br>
+        <label for="weight">Specialization</label><br>
+        <label for="ripDate">Max students</label><br>
+
+        <input class="submit" type="submit" value="Edit"/>
+    </div>
+
+    <div>
+        <input class="input" id="id" th:field="*{id}" th:value="${group.getId()}" type="text"/><br>
+        <input class="input" id="kind" th:field="*{name}" th:value="${group.getName()}" type="text"/><br>
+        <input class="input" id="weight" th:field="*{specialization}" th:value="${group.getSpecialization()}"
+               type="text"/><br>
+        <input class="input" id="ripDate" step="0.01" th:field="*{maxStudents}" th:value="${group.getMaxStudents()}"
+               type="number"/><br>
+    </div>
+
+    <div>
+        <a href="/">Back</a>
+    </div>
+</form>
+</body>
+</html>
