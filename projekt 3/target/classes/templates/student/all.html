@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl-PL" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>All students</title>
+    <title>All mongoStudents</title>
     <style>
         table {
             border-collapse: collapse;
@@ -15,9 +15,9 @@
 <body>
 <h2>Welcome to our School database</h2>
 
-<div th:switch="${students.size()}">
-    <h3 th:case="1">We have <span th:text="${students.size()}"></span> students in our database</h3>
-    <h3 th:case="*">We have <span th:text="${students.size()}"></span> students in our database</h3>
+<div th:switch="${mongoStudents.size()}">
+    <h3 th:case="1">We have <span th:text="${mongoStudents.size()}"></span> mongoStudents in our database</h3>
+    <h3 th:case="*">We have <span th:text="${mongoStudents.size()}"></span> mongoStudents in our database</h3>
 </div>
 
 <div th:switch="${errorMsg}">
@@ -30,8 +30,8 @@
     <h4 th:case="*"><span th:text="${msg}"></span></h4>
 </div>
 
-<div th:switch="${students.size()}">
-    <h5 th:case="0">There are no students</h5>
+<div th:switch="${mongoStudents.size()}">
+    <h5 th:case="0">There are no mongoStudents</h5>
 
     <div th:case="*">
         <table>
@@ -47,23 +47,23 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="student : ${students}">
-                <td th:text="${student.getId()}"></td>
-                <td th:text="${student.getName()}"></td>
-                <td th:text="${student.getSecondName()}"></td>
-                <td th:text="${student.getSurname()}"></td>
-                <td th:text="${student.getGroup().getName()}"></td>
-                <td th:text="${student.getAddress().getId()}"></td>
-                <td th:text="${student.getLectures().size()}"></td>
+            <tr th:each="mongoStudent : ${mongoStudents}">
+                <td th:text="${mongoStudent.getId()}"></td>
+                <td th:text="${mongoStudent.getName()}"></td>
+                <td th:text="${mongoStudent.getSecondName()}"></td>
+                <td th:text="${mongoStudent.getSurname()}"></td>
+                <td th:text="${mongoStudent.getGroup().getName()}"></td>
+                <td th:text="${mongoStudent.getAddress().getId()}"></td>
+                <td th:text="${mongoStudent.getLectures().size()}"></td>
 
                 <td>
-                    <form action="#" method="get" th:action="@{/student/edit/{id}(id=${student.getId()})}">
+                    <form action="#" method="get" th:action="@{/mongoStudent/edit/{id}(id=${mongoStudent.getId()})}">
                         <input class="submit" type="submit" value="Edit"/>
                     </form>
                 </td>
 
                 <td>
-                    <form action="#" method="post" th:action="@{/student/remove/{id}(id=${student.getId()})}">
+                    <form action="#" method="post" th:action="@{/mongoStudent/remove/{id}(id=${mongoStudent.getId()})}">
                         <input class="submit" type="submit" value="Remove"/>
                     </form>
                 </td>
@@ -73,7 +73,7 @@
     </div>
 
     <br>
-    <form action="#" method="get" th:action="@{/student/new}">
+    <form action="#" method="get" th:action="@{/mongoStudent/new}">
         <input class="submit" type="submit" value="Add"/>
     </form>
 

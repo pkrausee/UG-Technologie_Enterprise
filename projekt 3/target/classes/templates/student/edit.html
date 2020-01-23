@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl-PL" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Edit student</title>
+    <title>Edit mongoStudent</title>
     <style>
         div {
             float: left;
@@ -23,11 +23,11 @@
     </style>
 </head>
 <body>
-<h1>Fill form to edit student</h1>
+<h1>Fill form to edit mongoStudent</h1>
 
-<h1 th:value="${student.getName()}"></h1>
+<h1 th:value="${mongoStudent.getName()}"></h1>
 
-<form action="#" method="post" th:action="@{/student/edit/}" th:object="${student}">
+<form action="#" method="post" th:action="@{/mongoStudent/edit/}" th:object="${mongoStudent}">
     <div class="labels">
         <label for="id">Id</label><br>
         <label for="name">Name</label><br>
@@ -38,10 +38,10 @@
     </div>
 
     <div>
-        <input class="input" id="id" th:field="*{id}" th:value="${student.getId()}" type="text"/><br>
-        <input class="input" id="name" th:field="*{name}" th:value="${student.getName()}" type="text"/><br>
-        <input class="input" id="secondName" th:field="*{secondName}" th:value="${student.getSecondName()}" type="text"/><br>
-        <input class="input" id="surname" th:field="*{surname}" th:value="${student.getSurname()}" type="text"/><br>
+        <input class="input" id="id" th:field="*{id}" th:value="${mongoStudent.getId()}" type="text"/><br>
+        <input class="input" id="name" th:field="*{name}" th:value="${mongoStudent.getName()}" type="text"/><br>
+        <input class="input" id="secondName" th:field="*{secondName}" th:value="${mongoStudent.getSecondName()}" type="text"/><br>
+        <input class="input" id="surname" th:field="*{surname}" th:value="${mongoStudent.getSurname()}" type="text"/><br>
     </div>
 
     <div>

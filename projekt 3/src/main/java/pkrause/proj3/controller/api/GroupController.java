@@ -1,9 +1,6 @@
 package pkrause.proj3.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pkrause.proj3.domain.Group;
 import pkrause.proj3.service.GroupService;
@@ -20,55 +17,27 @@ public class GroupController {
     }
 
     @PostMapping("/api/group")
-    public ResponseEntity<Group> postGroup(RequestEntity<Group> group) {
-        if (group.getBody() == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(this.service.save(group.getBody()), HttpStatus.BAD_REQUEST);
+    public Group postGroup(@RequestBody Group group) {
+        return this.service.save(group);
     }
 
     @GetMapping("/api/group")
-    public ResponseEntity<List<Group>> getGroup() {
-        return new ResponseEntity<>(this.service.read(), HttpStatus.OK);
+    public List<Group> getGroup() {
+        return this.service.read();
     }
 
     @GetMapping("/api/group/{id}")
-    public ResponseEntity<Group> getGroup(@PathVariable String id) {
-        try {
-            Long longId = Long.valueOf(id);
-
-            return new ResponseEntity<>(this.service.read(longId), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public Group getGroup(@PathVariable Long id) {
+        return this.service.read(id);
     }
 
     @PutMapping("/api/group/{id}")
-    public ResponseEntity<Group> putGroup(@PathVariable String id, RequestEntity<Group> group) {
-        if (group.getBody() == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        try {
-            Long longId = Long.valueOf(id);
-
-            return new ResponseEntity<>(this.service.update(longId, group.getBody()), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public Group putGroup(@PathVariable Long id, @RequestBody Group group) {
+        return this.service.update(id, group);
     }
 
     @DeleteMapping("/api/group/{id}")
-    public ResponseEntity<String> deleteGroup(@PathVariable String id) {
-        try {
-            Long longId = Long.valueOf(id);
-
-            this.service.delete(longId);
-
-            return new ResponseEntity<>("Group deleted", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Invalid request", HttpStatus.BAD_REQUEST);
-        }
+    public void deleteGroup(@PathVariable Long id) {
+        this.service.delete(id);
     }
 }

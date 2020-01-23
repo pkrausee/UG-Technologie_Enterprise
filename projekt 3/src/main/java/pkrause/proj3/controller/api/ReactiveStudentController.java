@@ -1,75 +1,45 @@
 package pkrause.proj3.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pkrause.proj3.domain.Student;
-import pkrause.proj3.service.StudentService;
+import pkrause.proj3.domain.MongoStudent;
+import pkrause.proj3.service.ReactiveStudentService;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
 public class ReactiveStudentController {
-    private StudentService service;
+    private ReactiveStudentService service;
 
     @Autowired
-    public ReactiveStudentController(StudentService service) {
+    public ReactiveStudentController(ReactiveStudentService service) {
         this.service = service;
     }
 
     @PostMapping("/api/reactive/student")
-    public ResponseEntity<Student> postStudent(RequestEntity<Student> student) {
-        if (student.getBody() == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(this.service.save(student.getBody()), HttpStatus.BAD_REQUEST);
+    public Mono<MongoStudent> postStudent(@RequestBody MongoStudent mongoStudent) {
+        return this.service.save(mongoStudent);
     }
 
     @GetMapping("/api/reactive/student")
-    public ResponseEntity<List<Student>> getStudent() {
-        return new ResponseEntity<>(this.service.read(), HttpStatus.OK);
+    public Flux<MongoStudent> getStudent() {
+        return this.service.read();
     }
 
     @GetMapping("/api/reactive/student/{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable String id) {
-        try {
-            UUID uuid = UUID.fromString(id);
-
-            return new ResponseEntity<>(this.service.read(uuid), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public Mono<MongoStudent> getStudent(@PathVariable UUID id) {
+        return this.service.read(id);
     }
 
     @PutMapping("/api/reactive/student/{id}")
-    public ResponseEntity<Student> putStudent(@PathVariable String id, RequestEntity<Student> student) {
-        if (student.getBody() == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        try {
-            UUID uuid = UUID.fromString(id);
-
-            return new ResponseEntity<>(this.service.update(uuid, student.getBody()), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public Mono<MongoStudent> putStudent(@PathVariable UUID id, @RequestBody MongoStudent mongoStudent) {
+        return this.service.update(id, mongoStudent);
     }
 
     @DeleteMapping("/api/reactive/student/{id}")
-    public ResponseEntity<String> deleteStudent(@PathVariable String id) {
-        try {
-            UUID uuid = UUID.fromString(id);
-
-            this.service.delete(uuid);
-
-            return new ResponseEntity<>("Student deleted", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Invalid request", HttpStatus.BAD_REQUEST);
-        }
+    public Mono<Void> deleteStudent(@PathVariable UUID id) {
+        return this.service.delete(id);
     }
 }

@@ -1,11 +1,8 @@
 package pkrause.proj3.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pkrause.proj3.domain.Group;
+import pkrause.proj3.domain.MongoGroup;
 import pkrause.proj3.service.ReactiveGroupService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -20,55 +17,27 @@ public class ReactiveGroupController {
     }
 
     @PostMapping("/api/reactive/group")
-    public ResponseEntity<Mono<Group>> postGroup(RequestEntity<Group> group) {
-        if (group.getBody() == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(this.service.save(group.getBody()), HttpStatus.BAD_REQUEST);
+    public Mono<MongoGroup> postStudent(@RequestBody MongoGroup mongoGroup) {
+        return this.service.save(mongoGroup);
     }
 
     @GetMapping("/api/reactive/group")
-    public ResponseEntity<Flux<Group>> getGroup() {
-        return new ResponseEntity<>(this.service.read(), HttpStatus.OK);
+    public Flux<MongoGroup> getStudent() {
+        return this.service.read();
     }
 
     @GetMapping("/api/reactive/group/{id}")
-    public ResponseEntity<Mono<Group>> getGroup(@PathVariable String id) {
-        try {
-            Long longId = Long.valueOf(id);
-
-            return new ResponseEntity<>(this.service.read(longId), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public Mono<MongoGroup> getStudent(@PathVariable Long id) {
+        return this.service.read(id);
     }
 
     @PutMapping("/api/reactive/group/{id}")
-    public ResponseEntity<Mono<Group>> putGroup(@PathVariable String id, RequestEntity<Group> group) {
-        if (group.getBody() == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        try {
-            Long longId = Long.valueOf(id);
-
-            return new ResponseEntity<>(this.service.update(longId, group.getBody()), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    public Mono<MongoGroup> putStudent(@PathVariable Long id, @RequestBody MongoGroup mongoGroup) {
+        return this.service.update(id, mongoGroup);
     }
 
     @DeleteMapping("/api/reactive/group/{id}")
-    public ResponseEntity<String> deleteGroup(@PathVariable String id) {
-        try {
-            Long longId = Long.valueOf(id);
-
-            this.service.delete(longId);
-
-            return new ResponseEntity<>("Group deleted", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Invalid request", HttpStatus.BAD_REQUEST);
-        }
+    public Mono<Void> deleteStudent(@PathVariable Long id) {
+        return this.service.delete(id);
     }
 }

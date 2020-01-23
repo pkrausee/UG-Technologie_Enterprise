@@ -2,7 +2,7 @@ package pkrause.proj3.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pkrause.proj3.domain.Group;
+import pkrause.proj3.domain.MongoGroup;
 import pkrause.proj3.repository.ReactiveGroupRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 import javax.validation.Valid;
 
 @Service
-public class ReactiveGroupService implements IReactiveService<Group, Long> {
+public class ReactiveGroupService implements IReactiveService<MongoGroup, Long> {
     private ReactiveGroupRepository repository;
 
     @Autowired
@@ -18,21 +18,21 @@ public class ReactiveGroupService implements IReactiveService<Group, Long> {
         this.repository = repository;
     }
 
-    public Mono<Group> save(@Valid Group group) {
-        return this.repository.save(group);
+    public Mono<MongoGroup> save(@Valid MongoGroup mongoGroup) {
+        return this.repository.save(mongoGroup);
     }
 
-    public Mono<Group> read(Long id) {
+    public Mono<MongoGroup> read(Long id) {
         return this.repository.findById(id);
     }
 
-    public Flux<Group> read() {
+    public Flux<MongoGroup> read() {
         return this.repository.findAll();
     }
 
-    public Mono<Group> update(Long id, Group group) {
-        group.setId(id);
-        return this.repository.save(group);
+    public Mono<MongoGroup> update(Long id, MongoGroup mongoGroup) {
+        mongoGroup.setId(id);
+        return this.repository.save(mongoGroup);
     }
 
     public Mono<Void> delete(Long id) {

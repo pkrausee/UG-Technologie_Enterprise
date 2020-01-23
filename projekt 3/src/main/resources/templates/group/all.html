@@ -40,26 +40,26 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Specialization</th>
-                <th>Max students</th>
-                <th>Current students</th>
+                <th>Max mongoStudents</th>
+                <th>Current mongoStudents</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="group : ${groups}">
-                <td th:text="${group.getId()}"></td>
-                <td th:text="${group.getName()}"></td>
-                <td th:text="${group.getSpecialization()}"></td>
-                <td th:text="${group.getMaxStudents()}"></td>
-                <td th:text="${group.getStudents().size()}"></td>
+            <tr th:each="mongoGroup : ${groups}">
+                <td th:text="${mongoGroup.getId()}"></td>
+                <td th:text="${mongoGroup.getName()}"></td>
+                <td th:text="${mongoGroup.getSpecialization()}"></td>
+                <td th:text="${mongoGroup.getMaxStudents()}"></td>
+                <td th:text="${mongoGroup.getStudents().size()}"></td>
 
                 <td>
-                    <form action="#" method="get" th:action="@{/group/edit/{id}(id=${group.getId()})}">
+                    <form action="#" method="get" th:action="@{/mongoGroup/edit/{id}(id=${mongoGroup.getId()})}">
                         <input class="submit" type="submit" value="Edit"/>
                     </form>
                 </td>
 
                 <td>
-                    <form action="#" method="post" th:action="@{/group/remove/{id}(id=${group.getId()})}">
+                    <form action="#" method="post" th:action="@{/mongoGroup/remove/{id}(id=${mongoGroup.getId()})}">
                         <input class="submit" type="submit" value="Remove"/>
                     </form>
                 </td>
@@ -69,7 +69,7 @@
     </div>
 
     <br>
-    <form action="#" method="get" th:action="@{/group/new}">
+    <form action="#" method="get" th:action="@{/mongoGroup/new}">
         <input class="submit" type="submit" value="Add"/>
     </form>
 
