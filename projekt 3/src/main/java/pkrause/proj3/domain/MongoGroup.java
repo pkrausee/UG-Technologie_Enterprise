@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Document
+@Document(collection = "groups")
 public class MongoGroup {
     @Id
     private Long id;
@@ -25,7 +25,7 @@ public class MongoGroup {
     private Integer maxStudents;
 
     @JsonIgnore
-    private List<MongoStudent> mongoStudents;
+    private List<MongoStudent> students;
 
     //region GET SET
     public Long getId() {
@@ -60,12 +60,12 @@ public class MongoGroup {
         this.maxStudents = maxStudents;
     }
 
-    public List<MongoStudent> getMongoStudents() {
-        return mongoStudents;
+    public List<MongoStudent> getStudents() {
+        return students;
     }
 
-    public void setMongoStudents(List<MongoStudent> mongoStudents) {
-        this.mongoStudents = mongoStudents;
+    public void setStudents(List<MongoStudent> students) {
+        this.students = students;
     }
     //endregion
 
@@ -76,7 +76,7 @@ public class MongoGroup {
                 ", name='" + name + '\'' +
                 ", specialization='" + specialization + '\'' +
                 ", maxStudents=" + maxStudents +
-                ", students=" + (mongoStudents == null ? 0 : mongoStudents.size()) +
+                ", students=" + (students == null ? 0 : students.size()) +
                 '}';
     }
 }

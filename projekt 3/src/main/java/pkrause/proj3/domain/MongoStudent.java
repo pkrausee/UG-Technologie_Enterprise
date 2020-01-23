@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
-@Document
+@Document(collection = "students")
 public class MongoStudent {
     @Id
     private UUID id;
@@ -19,7 +19,7 @@ public class MongoStudent {
     @NotBlank(message = "Surname is mandatory")
     private String surname;
 
-    private MongoGroup mongoGroup;
+    private MongoGroup group;
 
     //region GET SET
     public UUID getId() {
@@ -54,12 +54,12 @@ public class MongoStudent {
         this.surname = surname;
     }
 
-    public MongoGroup getMongoGroup() {
-        return mongoGroup;
+    public MongoGroup getGroup() {
+        return group;
     }
 
-    public void setMongoGroup(MongoGroup mongoGroup) {
-        this.mongoGroup = mongoGroup;
+    public void setGroup(MongoGroup group) {
+        this.group = group;
     }
     //endregion
 
@@ -70,7 +70,7 @@ public class MongoStudent {
                 ", name='" + name + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", surname='" + surname + '\'' +
-                ", group=" + mongoGroup +
+                ", group=" + group +
                 '}';
     }
 }
