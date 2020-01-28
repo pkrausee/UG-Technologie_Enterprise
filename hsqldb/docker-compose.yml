@@ -1,0 +1,19 @@
+jenkins:
+  image: blacklabelops/hsqldb
+  container_name: hsqldb
+  ports:
+   - "9001:9001"
+  volumes:
+    - /opt/database
+  environment:
+    - HSQLDB_TRACE=true
+    - HSQLDB_SILENT=false
+    - HSQLDB_REMOTE=true
+    - HSQLDB_DATABASE_NAME=hsqldb
+    - HSQLDB_DATABASE_ALIAS=hsqldb
+    - HSQLDB_DATABASE_HOST=localhost
+    - HSQLDB_USER=sa
+    - HSQLDB_PASSWORD=sa
+  labels:
+    com.blacklabelops.description: "HSQL Development System"
+    com.blacklabelops.service: "hsqldb-server"
